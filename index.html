@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Visualizer</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23080b18'/%3E%3Cpath d='M9 21h14' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M13 18l3 3 5-8' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./project-assets/foundation.css" />
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body>
+    <div class="mv-app">
+      <header class="mv-header">
+        <div class="mv-header-copy">
+          <p class="caps">Private browser tool</p>
+          <h1><span class="mv-light">Music</span> <span class="accent">Visualizer</span></h1>
+        </div>
+      </header>
+
+      <main class="mv-layout">
+        <aside class="mv-sidebar">
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Audio</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Audio panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <label class="mv-upload">
+                <span>Upload music</span>
+                <input id="audio-file" type="file" accept="audio/*" />
+              </label>
+
+              <div class="mv-inline-meta">
+                <span class="mv-inline-label">Current file</span>
+                <span id="audio-file-name" class="mv-inline-value">No file selected</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Track info</p>
+                <p class="meta">Shown on the preview and export.</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Track info panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <label class="mv-field">
+                <span>Music name</span>
+                <input id="track-title" type="text" placeholder="Track title" />
+              </label>
+
+              <label class="mv-field">
+                <span>Text</span>
+                <textarea id="track-text" rows="3" placeholder="Main text">N I M A  A K S O Y</textarea>
+              </label>
+
+              <label class="mv-field">
+                <span>Text horizontal position</span>
+                <div class="mv-range-row">
+                  <input id="track-card-offset-x" type="range" min="-100" max="100" step="1" value="0" />
+                  <output id="track-card-offset-x-value">0%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Text vertical position</span>
+                <div class="mv-range-row">
+                  <input id="track-card-offset-y" type="range" min="-100" max="100" step="1" value="-64" />
+                  <output id="track-card-offset-y-value">-64%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Text size</span>
+                <div class="mv-range-row">
+                  <input id="track-card-scale" type="range" min="60" max="180" step="1" value="79" />
+                  <output id="track-card-scale-value">79%</output>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Extra text</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Extra text panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <label class="mv-field">
+                <span>Text</span>
+                <textarea id="extra-text" rows="4" placeholder="Additional text"></textarea>
+              </label>
+
+              <label class="mv-field">
+                <span>Text horizontal position</span>
+                <div class="mv-range-row">
+                  <input id="extra-offset-x" type="range" min="-100" max="100" step="1" value="0" />
+                  <output id="extra-offset-x-value">0%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Text vertical position</span>
+                <div class="mv-range-row">
+                  <input id="extra-offset-y" type="range" min="-100" max="100" step="1" value="12" />
+                  <output id="extra-offset-y-value">12%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Text size</span>
+                <div class="mv-range-row">
+                  <input id="extra-scale" type="range" min="60" max="180" step="1" value="76" />
+                  <output id="extra-scale-value">76%</output>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Visualizer</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Visualizer panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <label class="mv-field">
+                <span>Style</span>
+                <select id="visualizer-style">
+                  <option value="bars">Pulse bars</option>
+                  <option value="ring">Halo ring</option>
+                  <option value="wave">Wave line</option>
+                  <option value="mirror-bars">Mirror horizontal</option>
+                  <option value="mirror-vertical">Mirror vertical</option>
+                  <option value="radial-spikes">Radial spikes</option>
+                  <option value="thin-wave">Thin waveform</option>
+                  <option value="stacked-bars">Stacked bars</option>
+                  <option value="orbit-particles">Orbit particles</option>
+                  <option value="center-pulse">Center line pulse</option>
+                </select>
+              </label>
+
+              <label class="mv-field">
+                <span>Accent color</span>
+                <input id="accent-color" class="mv-color-input" type="color" value="#ffffff" />
+              </label>
+
+              <label class="mv-field">
+                <span>Bar density</span>
+                <div class="mv-range-row">
+                  <input id="bar-count" type="range" min="16" max="120" step="4" value="64" />
+                  <output id="bar-count-value">64</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Intensity</span>
+                <div class="mv-range-row">
+                  <input id="intensity" type="range" min="0.6" max="2.4" step="0.1" value="0.6" />
+                  <output id="intensity-value">0.6</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Smoothing</span>
+                <div class="mv-range-row">
+                  <input id="smoothing" type="range" min="0.35" max="0.95" step="0.01" value="0.95" />
+                  <output id="smoothing-value">0.95</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Horizontal position</span>
+                <div class="mv-range-row">
+                  <input id="visualizer-offset-x" type="range" min="-40" max="40" step="1" value="0" />
+                  <output id="visualizer-offset-x-value">0%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Vertical position</span>
+                <div class="mv-range-row">
+                  <input id="visualizer-offset-y" type="range" min="-40" max="40" step="1" value="-3" />
+                  <output id="visualizer-offset-y-value">-3%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Visualizer size</span>
+                <div class="mv-range-row">
+                  <input id="visualizer-scale" type="range" min="0" max="100" step="1" value="50" />
+                  <output id="visualizer-scale-value">50%</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Curve</span>
+                <div class="mv-range-row">
+                  <input id="visualizer-curve" type="range" min="-100" max="100" step="1" value="0" />
+                  <output id="visualizer-curve-value">0%</output>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Background</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Background panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <label class="mv-field">
+                <span>Source</span>
+                <select id="background-source">
+                  <option value="preset">Preset</option>
+                  <option value="image">Image</option>
+                  <option value="video" selected>Video</option>
+                </select>
+              </label>
+
+              <div id="preset-picker" class="mv-preset-grid" aria-label="Background presets">
+                <button class="mv-preset is-active" data-preset="midnight" type="button">
+                  <span class="mv-preset-swatch mv-preset-midnight"></span>
+                  <span>Midnight</span>
+                </button>
+                <button class="mv-preset" data-preset="sunset" type="button">
+                  <span class="mv-preset-swatch mv-preset-sunset"></span>
+                  <span>Sunset</span>
+                </button>
+                <button class="mv-preset" data-preset="studio" type="button">
+                  <span class="mv-preset-swatch mv-preset-studio"></span>
+                  <span>Studio</span>
+                </button>
+                <button class="mv-preset" data-preset="aurora" type="button">
+                  <span class="mv-preset-swatch mv-preset-aurora"></span>
+                  <span>Aurora</span>
+                </button>
+              </div>
+
+              <div id="image-upload-group" class="mv-upload-group" hidden>
+                <label class="mv-upload">
+                  <span>Upload image</span>
+                  <input id="background-image" type="file" accept="image/*" />
+                </label>
+                <p id="background-image-name" class="meta">No image selected</p>
+              </div>
+
+              <div id="video-upload-group" class="mv-upload-group" hidden>
+                <label class="mv-upload">
+                  <span>Upload video</span>
+                  <input id="background-video" type="file" accept="video/*" />
+                </label>
+                <p id="background-video-name" class="meta">No video selected</p>
+              </div>
+
+              <label class="mv-field">
+                <span>Overlay strength</span>
+                <div class="mv-range-row">
+                  <input id="overlay-strength" type="range" min="0" max="0.85" step="0.01" value="0" />
+                  <output id="overlay-strength-value">0.00</output>
+                </div>
+              </label>
+
+              <label class="mv-field">
+                <span>Background blur</span>
+                <div class="mv-range-row">
+                  <input id="background-blur" type="range" min="0" max="20" step="1" value="0" />
+                  <output id="background-blur-value">0px</output>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <section class="mv-panel">
+            <div class="mv-panel-head">
+              <div>
+                <p class="caps">Export</p>
+              </div>
+              <button class="mv-panel-toggle" type="button" data-panel-toggle aria-expanded="true" aria-label="Toggle Export panel">
+                <svg class="mv-panel-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 9l6 6l6 -6" />
+                </svg>
+              </button>
+            </div>
+            <div class="mv-panel-body">
+              <div class="mv-actions mv-actions-export">
+                <button id="download-landscape" class="mv-button mv-button-icon" type="button">
+                  <span class="mv-button-icon-mark" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 9a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -6" />
+                    </svg>
+                  </span>
+                  <span class="mv-button-label">Download 16:9</span>
+                </button>
+
+                <button id="download-portrait" class="mv-button mv-button-icon" type="button">
+                  <span class="mv-button-icon-mark" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -12" />
+                    </svg>
+                  </span>
+                  <span class="mv-button-label">Download 9:16</span>
+                </button>
+              </div>
+
+              <div id="export-progress" class="mv-progress" hidden>
+                <div class="mv-progress-head">
+                  <span id="export-progress-label" class="meta">Preparing export...</span>
+                  <span id="export-progress-value" class="meta">0%</span>
+                </div>
+                <div class="mv-progress-track" aria-hidden="true">
+                  <div id="export-progress-fill" class="mv-progress-fill"></div>
+                </div>
+              </div>
+
+              <p id="recording-status" class="meta" hidden></p>
+            </div>
+          </section>
+        </aside>
+
+        <section class="mv-stage-panel">
+          <div class="mv-stage-head">
+            <div>
+              <p class="caps">Preview</p>
+              <p class="meta">16:9 and 9:16 live previews</p>
+            </div>
+          </div>
+
+          <div class="mv-stage-previews">
+            <div class="mv-stage-shell">
+              <canvas id="visualizer-canvas" width="1280" height="720" aria-label="Music visualizer 16 by 9 preview"></canvas>
+            </div>
+
+            <div class="mv-stage-shell mv-stage-shell-portrait">
+              <canvas id="portrait-visualizer-canvas" width="720" height="1280" aria-label="Music visualizer 9 by 16 preview"></canvas>
+            </div>
+          </div>
+
+          <div class="mv-stage-footer">
+            <audio id="audio-player" controls preload="metadata"></audio>
+          </div>
+        </section>
+      </main>
+
+      <footer class="mv-footer" aria-label="Application footer">
+        <div class="mv-footer-inner">
+          <div class="mv-footer-left">
+            <p class="mv-footer-sponsor">
+              <strong>Sponsor:</strong>
+              <a href="https://bowora.com" target="_blank" rel="noreferrer">Bowora.com</a>
+            </p>
+            <p class="mv-footer-processing"><em>All processing happens in your browser. Your files are never uploaded to a server.</em></p>
+            <a
+              class="mv-footer-coffee"
+              href="https://buymeacoffee.com/nimaa"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 2v2M14 2v2M6 2v2M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
+              </svg>
+              <span>Buy me a coffee</span>
+            </a>
+          </div>
+          <div class="mv-footer-right" aria-label="App highlights">
+            <span class="mv-footer-sep">|</span>
+            <span>Fast</span>
+            <span class="mv-footer-sep">·</span>
+            <span>Secure</span>
+            <span class="mv-footer-sep">·</span>
+            <span>Private</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
