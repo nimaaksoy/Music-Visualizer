@@ -2,34 +2,39 @@
 
 ![Music Visualizer preview](./bg-readme.png)
 
-Browser-based music visualizer for creating shareable landscape and portrait videos from a local audio file. Everything runs client-side in the browser.
+Browser-based music visualizer for turning a local audio file into a shareable landscape or portrait video. Everything runs in your browser — no uploads, no accounts, no tracking.
 
 ## Demo
 
-- Live sample: [mv.nimaaksoy.com](https://mv.nimaaksoy.com)
+- Live: [mv.nimaaksoy.com](https://mv.nimaaksoy.com)
 - Sponsor: [Bowora.com](https://bowora.com)
 
 ## Features
 
-- Upload a local audio file
-- Add track title and custom text overlays
-- Pick from multiple visualizer styles
-- Use preset backgrounds or upload your own image/video
-- Export landscape and portrait video outputs locally
-- Keep processing private with no server upload
+- **Pick your canvas** — onboarding modal asks for 16:9 or 9:16; switch any time from the header.
+- **Upload local audio** — your file never leaves the browser.
+- **Track info & extra text** — title and freeform text with independent position / size controls.
+- **Visualizer styles** — Rounded bars, Reflective bars, Dot spectrum, Liquid wave, Bloom line, Aurora bands, Spectrum hills, Frequency rings, plus an Off option to disable the visualizer entirely.
+- **Particle layer** — Dust, Snow, Embers, Bubbles, Confetti, Sparks, Rain, Film grain, Glitch, Light leaks. Default off, intensity slider.
+- **Mood backgrounds** — Mesh, Noir, Onyx, Gold, Silver, Chrome, Pastel, Sage, Dusk, Vapor, Ocean, Crimson. Or upload your own image or video.
+- **Trim before export** — dual-handle range slider picks the segment to render.
+- **Render quality** — 720p / 1080p / 1440p / 4K, defaults to 1080p for fast exports.
+- **Accordion sidebar** — one panel open at a time, easy to navigate.
 
 ## Privacy
 
 - No backend
 - No cloud processing
+- No analytics, no cookies, no tracking
 - Nothing is uploaded unless you choose to publish the exported file yourself
 
 ## Tech
 
-- Vanilla HTML, CSS, and JavaScript
+- Vanilla HTML, CSS, and JavaScript — no build step
 - Web Audio API for audio analysis
 - Canvas 2D for rendering
-- MediaRecorder for local export
+- MediaRecorder for local video export
+- IntersectionObserver pauses rendering when the canvas is off-screen
 
 ## Local Run
 
